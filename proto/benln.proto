@@ -1,0 +1,12 @@
+syntax = "proto3";
+package benln;
+
+service BenLn {
+  rpc GetNodeInfo (GetNodeInfoRequest) returns (GetNodeInfoResponse);
+}
+
+message GetNodeInfoRequest {}
+
+message GetNodeInfoResponse {
+  string node_id = 1;
+}

@@ -1,0 +1,19 @@
+[package]
+name = "benlncli"
+version = "0.0.1"
+edition = "2021"
+authors = ["benny blader <ben@bitcoinbay.live"]
+description = "CLI tool kit for LNURL"
+license = "MIT"
+homepage = "https://rollerhodl.me"
+repository = "https://github.com/bennyhodl/benln"
+
+[dependencies]
+anyhow = "1.0.75"
+clap = { version = "4.4.7", features = ["derive"] }
+prost = "0.12.1"
+tokio = { version = "1.33.0", features = ["full"] }
+tonic = "0.10.2"
+
+[build-dependencies]
+tonic-build = "0.10.2"
