@@ -3,10 +3,207 @@ package benln;
 
 service BenLn {
   rpc GetNodeInfo (GetNodeInfoRequest) returns (GetNodeInfoResponse);
+  rpc NewAddress (NewAddressRequest) returns (NewAddressResponse);
+  rpc SignMessage (SignMessageRequest) returns (SignMessageResponse);
+  rpc Stop (StopRequest) returns (StopResponse);
+  rpc AddPeer (AddPeerRequest) returns (AddPeerResponse);
+  rpc GetOnchainSpendable (GetOnchainSpendableRequest) returns (GetOnchainSpendableResponse);
+  rpc GetTotalOnchainBalance (GetTotalOnchainBalanceRequest) returns (GetTotalOnchainBalanceResponse);
+  rpc SendToAddress (SendToAddressRequest) returns (SendToAddressResponse);
+  rpc ListChannels (ListChannelsRequest) returns (ListChannelsResponse);
+  rpc RemovePeer (RemovePeerRequest) returns (RemovePeerResponse);
+  rpc OpenChannel (OpenChannelRequest) returns (OpenChannelResponse);
+  rpc CloseChannel (CloseChannelRequest) returns (CloseChannelResponse);
+  rpc SyncWallet (SyncWalletRequest) returns (SyncWalletResponse);
+  rpc SendPayment (SendPaymentRequest) returns (SendPaymentResponse);
+  rpc SendPaymentWithAmount (SendPaymentWithAmountRequest) returns (SendPaymentWithAmountResponse);
+  rpc SendSpontaneousPayment (SendSpontaneousPaymentRequest) returns (SendSpontaneousPaymentResponse);
+  rpc CreateInvoice (CreateInvoiceRequest) returns (CreateInvoiceResponse);
+  rpc ZeroAmountInvoice (ZeroAmountRequest) returns (ZeroAmountResponse);
+  rpc GetPayment (GetPaymentRequest) returns (GetPaymentResponse);
 }
 
 message GetNodeInfoRequest {}
 
 message GetNodeInfoResponse {
   string node_id = 1;
+  string listening_address = 2;
 }
+
+message NewAddressRequest {}
+
+message NewAddressResponse {
+  string address = 1;
+}
+
+message SignMessageRequest {
+  string msg = 1;
+}
+
+message SignMessageResponse {
+  string signature = 1;
+}
+
+message StopRequest {}
+
+message StopResponse {}
+
+message AddPeerRequest {
+  string pubkey = 1;
+  string uri = 2;
+  bool persist = 3;
+}
+message AddPeerResponse {}
+
+message GetOnchainSpendableRequest {}
+
+message GetOnchainSpendableResponse {
+  string spendable_sats = 1;
+}
+
+
+message GetTotalOnchainBalanceRequest {}
+
+message GetTotalOnchainBalanceResponse {
+  uint64 total_balance_sats = 1;
+}
+
+message SendToAddressRequest {
+  string address = 1;
+  uint64 amount_sats = 2;
+}
+
+message SendToAddressResponse {
+  string txid = 1;
+}
+
+message SweepWalletRequest {
+  string address = 1;
+}
+
+message SweepWalletResponse {
+  string txid = 1;
+}
+
+message ListChannelsRequest {}
+
+message ListChannelsResponse {
+  repeated Channel channels = 1;
+}
+
+message Channel {
+  string channel_id = 1;
+  string counterparty_node_id = 2;
+  string funding_txo = 3;
+  uint64 channel_value_sats = 4;
+  uint64 unspendable_punishment_reserve = 5;
+  string user_channel_id = 6;
+  uint32 feerate_sat_per_1000_weight = 7;
+  uint64 balance_msat = 8;
+  uint64 outbound_capacity_msat = 9;
+  uint64 inbound_capacity_msat = 10;
+  uint32 confirmations_required = 11;
+  uint32 confirmations = 12;
+  bool is_outbound = 13;
+  bool is_channel_ready = 14;
+  bool is_usable = 15;
+  bool is_public = 16;
+  uint32 cltv_expiry_delta = 17;
+}
+
+message RemovePeerRequest {
+  string pubkey = 1;
+}
+
+message RemovePeerResponse {}
+
+message OpenChannelRequest {
+  string pubkey = 1;
+  string address = 2;
+  uint64 channel_amount_sats = 3;
+  string push_amount = 4;
+  // Fix me
+  bool channel_config = 5;
+  bool announce_channel = 6;
+
+}
+
+message OpenChannelResponse {}
+
+message SyncWalletRequest {}
+
+message SyncWalletResponse {}
+
+message CloseChannelRequest {
+  string channel_id = 1;
+  string pubkey = 2;
+  // fix me
+  bool channel_config = 3;
+}
+
+message CloseChannelResponse {}
+
+message SendPaymentRequest {
+  string invoice = 1;
+}
+
+message SendPaymentResponse {
+  string payment_hash = 2;
+}
+
+message SendPaymentWithAmountRequest {
+  string invoice = 1;
+  uint64 amount_msat = 2;
+}
+
+message SendPaymentWithAmountResponse {
+  string payment_hash = 1;
+}
+
+message SendSpontaneousPaymentRequest {
+  uint64 amount_msat = 1;
+  string pubkey = 2;
+}
+
+message SendSpontaneousPaymentResponse {
+  string payment_hash = 1;
+}
+
+message CreateInvoiceRequest {
+  uint64 amount_msat = 1;
+  string description = 2;
+  uint32 expiry_secs = 3;
+}
+
+message CreateInvoiceResponse {
+  string invoice = 1;
+}
+
+message ZeroAmountRequest {
+  string description = 1;
+  uint32 expiry_secs = 2;
+}
+
+message ZeroAmountResponse {
+  string invoice = 1;
+}
+
+message GetPaymentRequest {
+  string payment_hash = 1;
+}
+
+message GetPaymentResponse {
+  string details = 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+

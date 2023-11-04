@@ -1,6 +1,6 @@
 [package]
 name = "benlnd"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 authors = ["benny blader <ben@bitcoinbay.live"]
 description = "CLI tool kit for LNURL"
@@ -10,10 +10,16 @@ repository = "https://github.com/bennyhodl/benln"
 
 [dependencies]
 anyhow = "1.0.75"
+clap = { version = "4.4.7", features = ["derive"] }
 ldk-node = { git = "https://github.com/lightningdevkit/ldk-node" }
 prost = "0.12.1"
+serde = { version = "1.0.190", features = ["derive"] }
+serde_json = "1.0.108"
+thiserror = "1.0.50"
 tokio = { version = "1.33.0", features = ["full"] }
 tonic = "0.10.2"
+tracing = "0.1.40"
+tracing-subscriber = "0.3.17"
 
 [build-dependencies]
 tonic-build = "0.10.2"
