@@ -6,8 +6,7 @@ mod node;
 
 use crate::node::BenLnNode;
 use benln::ben_ln_server::BenLnServer;
-use ldk_node::SocketAddress;
-use ldk_node::{bitcoin::Network, Builder, LogLevel};
+use ldk_node::{bitcoin::Network, Builder, LogLevel, lightning::ln::msgs::SocketAddress};
 use std::str::FromStr;
 use tonic::transport::Server;
 use tracing::{info, Level};
@@ -17,8 +16,9 @@ async fn main() -> anyhow::Result<()> {
     tracing_subscriber::fmt().with_max_level(Level::INFO).init();
 
     let builder = Builder::new()
-        .set_network(Network::Testnet)
-        .set_esplora_server("https://blockstream.info/testnet/api".to_string())
+        .set_network(Network::Regtest)
+        // .set_esplora_server("https://blockstream.info/testnet/api".to_string())
+        .set_bitcoind_server("http://127.0.0.1:18444".to_string(), "polaruser".to_string(), "polarpass".to_string())
         .set_storage_dir_path("../../.benln".to_string())
         .set_log_level(LogLevel::Info)
         .set_listening_address(SocketAddress::from_str("0.0.0.0:9735").unwrap())

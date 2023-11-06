@@ -15,7 +15,7 @@ use crate::{
     },
     node::BenLnNode,
 };
-use ldk_node::{bitcoin::secp256k1::PublicKey, SocketAddress};
+use ldk_node::{bitcoin::secp256k1::PublicKey, lightning::ln::msgs::SocketAddress};
 use std::str::FromStr;
 use tonic::{Request, Response, Status};
 
@@ -143,7 +143,11 @@ impl BenLn for BenLnNode {
         &self,
         _request: Request<GetTotalOnchainBalanceRequest>,
     ) -> Result<Response<GetTotalOnchainBalanceResponse>, Status> {
-        todo!()
+        let balance = self.node.total_onchain_balance_sats().unwrap();
+
+        let response = GetTotalOnchainBalanceResponse { total_balance_sats: balance };
+
+        Ok(Response::new(response))
     }
 
     async fn send_to_address(

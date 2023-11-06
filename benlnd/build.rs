@@ -26,6 +26,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             "SignMessageResponse",
             "#[derive(serde::Deserialize, serde::Serialize)]",
         )
+        .type_attribute(
+            "GetTotalOnchainBalanceResponse",
+            "#[derive(serde::Deserialize, serde::Serialize)]",
+        )
         .compile(&proto_paths, &[dir])?;
 
     Ok(())

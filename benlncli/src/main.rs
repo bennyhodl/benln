@@ -3,7 +3,7 @@ pub mod benln {
 }
 use benln::{
     ben_ln_client::BenLnClient, GetNodeInfoRequest, NewAddressRequest, SignMessageRequest,
-    StopRequest,
+    StopRequest, GetTotalOnchainBalanceRequest,
 };
 use clap::{Args, Parser, Subcommand};
 
@@ -20,6 +20,8 @@ pub enum Command {
     Info,
     /// Generate a new on-chain address.
     NewAddress,
+    /// Get on-chain balance.
+    WalletBalance,
     /// Sign a message with the node keys.
     SignMessage(SignMessageArgs),
     /// Stop the node.
@@ -54,6 +56,14 @@ async fn main() -> anyhow::Result<()> {
             let json = serde_json::to_string(&response)?;
 
             println!("{}", json)
+        }
+        Command::WalletBalance => {
+            let msg = GetTotalOnchainBalanceRequest {};
+            let response = client.get_total_onchain_balance(msg).await?.into_inner();
+
+            let json = serde_json::to_string(&response)?;
+
+            println!("{}", json) 
         }
         Command::SignMessage(msg) => {
             let msg = SignMessageRequest { msg: msg.msg };
