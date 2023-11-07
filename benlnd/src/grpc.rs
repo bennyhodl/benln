@@ -1,12 +1,12 @@
 use crate::{
     benln::{
-        ben_ln_server::BenLn,
-        AddPeerRequest, AddPeerResponse, CloseChannelRequest, CloseChannelResponse,
-        CreateInvoiceRequest, CreateInvoiceResponse, GetNodeInfoRequest, GetNodeInfoResponse,
-        GetOnchainSpendableRequest, GetOnchainSpendableResponse, GetPaymentRequest,
-        GetPaymentResponse, GetTotalOnchainBalanceRequest, GetTotalOnchainBalanceResponse,
-        ListChannelsRequest, ListChannelsResponse, NewAddressRequest, NewAddressResponse,
-        OpenChannelRequest, OpenChannelResponse, RemovePeerRequest, RemovePeerResponse,
+        ben_ln_server::BenLn, AddPeerRequest, AddPeerResponse, CloseChannelRequest,
+        CloseChannelResponse, CreateInvoiceRequest, CreateInvoiceResponse, GetNodeInfoRequest,
+        GetNodeInfoResponse, GetOnchainSpendableRequest, GetOnchainSpendableResponse,
+        GetPaymentRequest, GetPaymentResponse, GetTotalOnchainBalanceRequest,
+        GetTotalOnchainBalanceResponse, ListChannelsRequest, ListChannelsResponse,
+        ListPeersRequest, ListPeersResponse, NewAddressRequest, NewAddressResponse,
+        OpenChannelRequest, OpenChannelResponse, Peer, RemovePeerRequest, RemovePeerResponse,
         SendPaymentRequest, SendPaymentResponse, SendPaymentWithAmountRequest,
         SendPaymentWithAmountResponse, SendSpontaneousPaymentRequest,
         SendSpontaneousPaymentResponse, SendToAddressRequest, SendToAddressResponse,
@@ -83,6 +83,24 @@ impl BenLn for BenLnNode {
         todo!()
     }
 
+    async fn list_peers(
+        &self,
+        _request: Request<ListPeersRequest>,
+    ) -> Result<Response<ListPeersResponse>, Status> {
+        let peers = self.node.list_peers();
+
+        let peers: Vec<Peer> = peers
+            .iter()
+            .map(|peer| Peer {
+                address: peer.address.to_string(),
+                is_connected: peer.is_connected,
+                is_persisted: peer.is_persisted,
+                node_id: peer.node_id.to_string(),
+            })
+            .collect();
+
+        Ok(Response::new(ListPeersResponse { peers }))
+    }
     async fn open_channel(
         &self,
         _request: Request<OpenChannelRequest>,
@@ -145,7 +163,9 @@ impl BenLn for BenLnNode {
     ) -> Result<Response<GetTotalOnchainBalanceResponse>, Status> {
         let balance = self.node.total_onchain_balance_sats().unwrap();
 
-        let response = GetTotalOnchainBalanceResponse { total_balance_sats: balance };
+        let response = GetTotalOnchainBalanceResponse {
+            total_balance_sats: balance,
+        };
 
         Ok(Response::new(response))
     }

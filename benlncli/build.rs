@@ -30,6 +30,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             "GetTotalOnchainBalanceResponse",
             "#[derive(serde::Deserialize, serde::Serialize)]",
         )
+        .type_attribute(
+            "ListPeersResponse",
+            "#[derive(serde::Deserialize, serde::Serialize)]",
+        )
+        .type_attribute("Peer", "#[derive(serde::Deserialize, serde::Serialize)]")
         .compile(&proto_paths, &[dir])?;
     Ok(())
 }

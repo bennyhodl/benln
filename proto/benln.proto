@@ -11,6 +11,7 @@ service BenLn {
   rpc GetTotalOnchainBalance (GetTotalOnchainBalanceRequest) returns (GetTotalOnchainBalanceResponse);
   rpc SendToAddress (SendToAddressRequest) returns (SendToAddressResponse);
   rpc ListChannels (ListChannelsRequest) returns (ListChannelsResponse);
+  rpc ListPeers (ListPeersRequest) returns (ListPeersResponse);
   rpc RemovePeer (RemovePeerRequest) returns (RemovePeerResponse);
   rpc OpenChannel (OpenChannelRequest) returns (OpenChannelResponse);
   rpc CloseChannel (CloseChannelRequest) returns (CloseChannelResponse);
@@ -109,6 +110,19 @@ message Channel {
   bool is_usable = 15;
   bool is_public = 16;
   uint32 cltv_expiry_delta = 17;
+}
+
+message ListPeersRequest {}
+
+message ListPeersResponse {
+  repeated Peer peers = 1;
+}
+
+message Peer {
+    string node_id = 1;
+    string address = 2;
+    bool is_persisted =  3;
+    bool is_connected = 4;
 }
 
 message RemovePeerRequest {
