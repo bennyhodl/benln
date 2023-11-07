@@ -1,19 +1,16 @@
-use crate::{
-    benln::{
-        ben_ln_server::BenLn, AddPeerRequest, AddPeerResponse, CloseChannelRequest,
-        CloseChannelResponse, CreateInvoiceRequest, CreateInvoiceResponse, GetNodeInfoRequest,
-        GetNodeInfoResponse, GetOnchainSpendableRequest, GetOnchainSpendableResponse,
-        GetPaymentRequest, GetPaymentResponse, GetTotalOnchainBalanceRequest,
-        GetTotalOnchainBalanceResponse, ListChannelsRequest, ListChannelsResponse,
-        ListPeersRequest, ListPeersResponse, NewAddressRequest, NewAddressResponse,
-        OpenChannelRequest, OpenChannelResponse, Peer, RemovePeerRequest, RemovePeerResponse,
-        SendPaymentRequest, SendPaymentResponse, SendPaymentWithAmountRequest,
-        SendPaymentWithAmountResponse, SendSpontaneousPaymentRequest,
-        SendSpontaneousPaymentResponse, SendToAddressRequest, SendToAddressResponse,
-        SignMessageRequest, SignMessageResponse, StopRequest, StopResponse, SyncWalletRequest,
-        SyncWalletResponse, ZeroAmountRequest, ZeroAmountResponse,
-    },
-    node::BenLnNode,
+use crate::node::BenLnNode;
+use benlnproto::benln::{
+    ben_ln_server::BenLn, AddPeerRequest, AddPeerResponse, CloseChannelRequest,
+    CloseChannelResponse, CreateInvoiceRequest, CreateInvoiceResponse, GetNodeInfoRequest,
+    GetNodeInfoResponse, GetOnchainSpendableRequest, GetOnchainSpendableResponse,
+    GetPaymentRequest, GetPaymentResponse, GetTotalOnchainBalanceRequest,
+    GetTotalOnchainBalanceResponse, ListChannelsRequest, ListChannelsResponse, ListPeersRequest,
+    ListPeersResponse, NewAddressRequest, NewAddressResponse, OpenChannelRequest,
+    OpenChannelResponse, Peer, RemovePeerRequest, RemovePeerResponse, SendPaymentRequest,
+    SendPaymentResponse, SendPaymentWithAmountRequest, SendPaymentWithAmountResponse,
+    SendSpontaneousPaymentRequest, SendSpontaneousPaymentResponse, SendToAddressRequest,
+    SendToAddressResponse, SignMessageRequest, SignMessageResponse, StopRequest, StopResponse,
+    SyncWalletRequest, SyncWalletResponse, ZeroAmountRequest, ZeroAmountResponse,
 };
 use ldk_node::{bitcoin::secp256k1::PublicKey, lightning::ln::msgs::SocketAddress};
 use std::str::FromStr;

@@ -11,11 +11,8 @@ repository = "https://github.com/bennyhodl/benln"
 [dependencies]
 anyhow = "1.0.75"
 clap = { version = "4.4.7", features = ["derive"] }
-prost = "0.12.1"
 serde = { version = "1.0.190", features = ["derive"] }
 serde_json = "1.0.108"
 tokio = { version = "1.33.0", features = ["full"] }
 tonic = "0.10.2"
-
-[build-dependencies]
-tonic-build = "0.10.2"
+benlnproto = { path = "../benlnproto"}

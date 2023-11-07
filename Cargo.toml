@@ -1,5 +1,6 @@
 [workspace]
 members = [
   "benlnd",
-  "benlncli"
+  "benlncli",
+  "benlnproto"
 ]

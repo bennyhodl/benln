@@ -1,5 +1,5 @@
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let dir = std::path::PathBuf::from("../proto");
+    let dir = std::path::PathBuf::from("./proto");
 
     let protos = ["benln.proto"];
 
@@ -14,6 +14,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     tonic_build::configure()
         .build_client(true)
         .build_server(true)
+        .out_dir("./src")
         .type_attribute(
             "GetNodeInfoResponse",
             "#[derive(serde::Deserialize, serde::Serialize)]",

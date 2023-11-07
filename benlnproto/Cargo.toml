@@ -1,0 +1,12 @@
+[package]
+name = "benlnproto"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tonic = "0.10.2"
+prost = "0.12.1"
+serde = { version = "1.0.192", features = ["derive"] }
+
+[build-dependencies]
+tonic-build = "0.10.2"

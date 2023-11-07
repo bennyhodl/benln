@@ -1,7 +1,4 @@
-pub mod benln {
-    tonic::include_proto!("benln");
-}
-use benln::{
+use benlnproto::benln::{
     ben_ln_client::BenLnClient, AddPeerRequest, GetNodeInfoRequest, GetTotalOnchainBalanceRequest,
     ListPeersRequest, NewAddressRequest, SignMessageRequest, StopRequest, SyncWalletRequest,
 };
