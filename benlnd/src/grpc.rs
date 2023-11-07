@@ -175,6 +175,8 @@ impl BenLn for BenLnNode {
         &self,
         _request: Request<SyncWalletRequest>,
     ) -> Result<Response<SyncWalletResponse>, Status> {
-        todo!()
+        let _sync = self.node.sync_wallets().unwrap();
+
+        Ok(Response::new(SyncWalletResponse {}))
     }
 }
